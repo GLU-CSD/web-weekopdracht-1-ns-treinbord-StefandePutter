@@ -5,22 +5,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Weekopdracht - NS-Treinbord</title>
 		<link rel="stylesheet" href="assets/css/style.css" />
+		<link rel="stylesheet" href="assets/css/clock.css" />
 		<script src="assets/js/script.js"></script>
 	</head>
 	<body>
 		<div id="container">
 			<div id="left">
 				<!-- hier komt de klok -->
-				<div id="klok">
-					<div id="wijzer-uur"></div>
-					<div id="wijzer-min"></div>
-					<div id="wijzer-sec">
+				<div id="clock">
+					<div id="hand-hour"></div>
+					<div id="hand-min"></div>
+					<div id="hand-sec">
 						<div class="line"></div>
 						<div class="circle"></div>
 						<div class="line"></div>
 					</div>
-					<div id="minuten"></div>
-					<div id="logo"></div>
+					<div id="minutes"></div>
 				</div>
 			</div>
 			<div id="middle">
@@ -28,6 +28,11 @@
 			</div>
 			<div id="right">
 				<!-- hier komt het spoor nummer -->
+				<div id="block-right">
+					<div id="small-block-right"></div>
+					<p>spoor</p>
+					<div id="track">18<span id="track-letter"> b</span></div>
+				</div>
 			</div>
 		</div>
 	</body>

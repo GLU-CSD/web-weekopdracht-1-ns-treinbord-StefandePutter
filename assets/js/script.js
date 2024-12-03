@@ -1,12 +1,12 @@
 window.addEventListener("load", function () {
-	var minutenEl = document.getElementById("minuten");
+	var minutesEl = document.getElementById("minutes");
 
 	for (var i = 0; i < 60; i++) {
-		var minuutEl = document.createElement("div");
-		minuutEl.classList.add("minuut");
-		minuutEl.style.transform =
+		var minuteEl = document.createElement("div");
+		minuteEl.classList.add("minute");
+		minuteEl.style.transform =
 			"rotate(" + Math.round((i / 60) * 360) + "deg) translateX(80px)";
-		minutenEl.appendChild(minuutEl);
+		minutesEl.appendChild(minuteEl);
 	}
 
 	setInterval(render, 1000);
@@ -22,15 +22,17 @@ function render() {
 
 	var sec = now.getSeconds();
 	var min = now.getMinutes();
-	var uur = now.getHours();
+	var hour = now.getHours();
 
 	//now = new Date(2018, 1, 20, 12, 0, 0)
-	document.getElementById("wijzer-sec").style.transform =
-		"rotate(" + (uur * 360 + min * 360 + ((sec / 60) * 360 + 180)) + "deg)";
-	document.getElementById("wijzer-min").style.transform =
-		"rotate(" + (uur * 360 + ((min / 60) * 360 + 180)) + "deg)";
-	document.getElementById("wijzer-uur").style.transform =
+	document.getElementById("hand-sec").style.transform =
 		"rotate(" +
-		((min / 60) * (360 / 12) + ((uur % 12) / 12) * 360 + 180) +
+		(hour * 360 + min * 360 + ((sec / 60) * 360 + 180)) +
+		"deg)";
+	document.getElementById("hand-min").style.transform =
+		"rotate(" + (hour * 360 + ((min / 60) * 360 + 180)) + "deg)";
+	document.getElementById("hand-hour").style.transform =
+		"rotate(" +
+		((min / 60) * (360 / 12) + ((hour % 12) / 12) * 360 + 180) +
 		"deg)";
 }
