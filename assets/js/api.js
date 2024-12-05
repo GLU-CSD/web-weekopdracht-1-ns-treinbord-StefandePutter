@@ -1,5 +1,3 @@
-let test1;
-let test;
 fetch(
 	"https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?station=Ut",
 	{
@@ -20,14 +18,12 @@ fetch(
 		return response.json();
 	})
 	.then((data) => {
-		test1 = data;
 		data.payload.departures.every((element) => {
 			if (
 				element.direction == "Zwolle" &&
 				element.trainCategory == "SPR"
 			) {
-				test = element;
-				makeBoard(test);
+				makeBoard(element);
 				return false;
 			} else {
 				return true;
@@ -37,16 +33,51 @@ fetch(
 	.catch((err) => console.error(err));
 
 function makeBoard(data) {
+	destination = data.direction;
 	track = data.actualTrack;
 	trainType = data.trainCategory;
-	viaStations = data.routeStations;
+	viaStations = data.routeStations.map((name) => name.mediumName);
+	message = data.messages.map((x) => x.message)[0];
 
-	time = new Date(data.actualDateTime) - new Date();
-	time -= data.actualTimeZoneOffset * 60000;
-	time = new Date(time);
+	plannedTime = new Date(data.plannedDateTime);
+	plannedTime = new Date(plannedTime);
 
-	hour = time.getHours();
-	min = time.getMinutes();
+	actualTime = new Date(data.actualDateTime) - new Date(data.plannedDateTime);
+	actualTime = new Date(actualTime);
 
-	// console.log(viaStations[0].mediumName);
+	plannedHour = plannedTime.getHours();
+	plannedMin = plannedTime.getMinutes();
+
+	differenceMin = actualTime.getMinutes();
+
+	// track
+	document.getElementById("track").innerHTML = track;
+
+	// time
+	document.getElementById("num").innerHTML = plannedHour + ":" + plannedMin;
+	if (differenceMin > 0) {
+		document.getElementById("extraTime").innerHTML =
+			"+" + parseInt(differenceMin);
+	}
+
+	// train type
+	document.getElementById("train-type").innerHTML =
+		trainType == "SPR" ? "Sprinter" : "Intercity";
+
+	// destination
+	document.getElementById("destination").innerHTML = destination;
+
+	// via stations
+	let via = document.getElementById("via");
+	via.innerHTML =
+		viaStations.slice(0, -1).join(", ") + ", en " + viaStations.slice(-1);
+
+	// message
+	document.getElementById("message").innerHTML = "<p>" + message + "</p>";
+
+	// next
+	let nextTime =
+		plannedMin == 21 ? plannedHour + ":51" : plannedHour + 1 + ":21";
+	document.getElementById("next").innerHTML =
+		"Hierna/next: " + nextTime + " SPR Zwolle";
 }

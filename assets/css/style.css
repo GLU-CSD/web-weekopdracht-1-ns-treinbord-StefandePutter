@@ -56,18 +56,18 @@ body {
 	position: relative;
 	top: -6px;
 	left: 25px;
-	color: #1441ad;
 	font-size: 11px;
+	color: #1441ad;
 	font-weight: 600;
 }
 
 #track {
 	position: relative;
 	text-align: center;
-	font-size: 48px;
+	font-size: 56px;
 	font-weight: 600;
-	margin: auto;
-	letter-spacing: -5px;
+	margin: -6px auto;
+	color: #1441ad;
 }
 
 #track-letter {
@@ -81,7 +81,7 @@ body {
 	position: relative;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
 }
 
 #content {
@@ -89,8 +89,8 @@ body {
 	height: 240px;
 	background-color: white;
 	box-sizing: border-box;
-	border: 3px solid rgb(0,0,106);
-	color: rgb(0,0,106);
+	border: 3px solid rgb(0, 0, 106);
+	color: rgb(0, 0, 106);
 }
 
 #time {
@@ -104,6 +104,11 @@ body {
 #time #num {
 	font-size: 30px;
 	padding-right: 5px;
+}
+
+#time #extraTime {
+	font-size: 25px;
+	color: rgb(255, 0, 0);
 }
 
 #train-type {
@@ -131,12 +136,44 @@ body {
 #via {
 	font-size: 20px;
 	padding: 10px;
+	margin-right: 80px;
+}
+
+#message {
+	height: 22px;
+	width: 460px;
+	position: absolute;
+	bottom: 29px;
+	font-size: 20px;
+	box-sizing: border-box;
+	overflow: hidden;
+	padding-left: 10px;
+}
+#message p {
+	display: inline-block;
+	margin-top: 0px;
+	color: red;
+	/* animation: move 14s ease-in-out infinite; */
+	/* animation-direction: alternate; */
+	position: relative;
+}
+
+@keyframes move {
+	25% {
+		transform: translate(0, 0);
+		left: 0%;
+	}
+	75%,
+	100% {
+		transform: translate(-100%, 0);
+		left: 100%;
+	}
 }
 
 #footer {
 	width: 480px;
 	height: 25px;
-	background: linear-gradient(45deg, transparent 7px, rgb(0,0,106) 0);
+	background: linear-gradient(45deg, transparent 7px, rgb(0, 0, 106) 0);
 }
 
 #next {
