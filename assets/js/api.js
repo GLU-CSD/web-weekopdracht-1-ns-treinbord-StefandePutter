@@ -19,10 +19,7 @@ fetch(
 	})
 	.then((data) => {
 		data.payload.departures.every((element) => {
-			if (
-				element.direction == "Zwolle" &&
-				element.trainCategory == "SPR"
-			) {
+			if (element.direction == "Zwolle" && element.trainCategory == "SPR") {
 				makeBoard(element);
 				return false;
 			} else {
@@ -50,32 +47,36 @@ function makeBoard(data) {
 
 	differenceMin = actualTime.getMinutes();
 
-	// track
+	// track number
 	document.getElementById("track").innerHTML = track;
 
-	// time
+	// time the planned time departure
 	document.getElementById("num").innerHTML = plannedHour + ":" + plannedMin;
 	if (differenceMin > 0) {
 		document.getElementById("extraTime").innerHTML =
 			"+" + parseInt(differenceMin);
 	}
 
-	// train type
+	// train type ic or spr
 	document.getElementById("train-type").innerHTML =
 		trainType == "SPR" ? "Sprinter" : "Intercity";
 
-	// destination
+	// destination of the train
 	document.getElementById("destination").innerHTML = destination;
 
-	// via stations
+	// via what stations the train goes
 	let via = document.getElementById("via");
-	via.innerHTML =
-		viaStations.slice(0, -1).join(", ") + ", en " + viaStations.slice(-1);
+	if (viaStations.length > 0) {
+		via.innerHTML =
+			viaStations.slice(0, -1).join(", ") + ", en " + viaStations.slice(-1);
+	} else {
+		via.innerHTML = "";
+	}
 
-	// message
+	// message for if there is something with the train
 	document.getElementById("message").innerHTML = "<p>" + message + "</p>";
 
-	// next
+	// when the next train goes
 	let nextTime =
 		plannedMin == 21 ? plannedHour + ":51" : plannedHour + 1 + ":21";
 	document.getElementById("next").innerHTML =
